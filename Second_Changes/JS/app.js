@@ -99,18 +99,19 @@ let catDisplay = {
     this.catNameElem = document.getElementById('cat-name');
     this.catImgElem = document.getElementById('cat-img');
     this.catCounterElem = document.getElementById('counter');
-    this.render();
 
     this.catImgElem.addEventListener('click', function(){
       octopus.incrementClicks();
-    })
+    });
+
+    this.render();
   },
 
   render: function () {
-    let currentCat = model.getCurrentCat();
+    let currentCat = octopus.getCurrentCat();
     this.catNameElem.textContent = currentCat.name;
     this.catImgElem.src = currentCat.imgSrc;
-    this.catCounterElem = currentCat.clicks;
+    this.catCounterElem.textContent = currentCat.clicks;
   }
 }
 
