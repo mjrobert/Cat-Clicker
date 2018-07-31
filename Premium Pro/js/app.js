@@ -156,6 +156,7 @@ var admin = {
         this.adminImgSrc = document.getElementById('admin-imgsrc');
         this.adminClicks = document.getElementById('admin-clicks');
 
+        
 
     }
 }
