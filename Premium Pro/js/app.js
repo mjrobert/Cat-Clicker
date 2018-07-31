@@ -5,34 +5,39 @@ var model = {
     currentCat: null,
     cats: [
         {
-            clickCount : 0,
-            name : 'Tabby',
-            imgSrc : 'img/434164568_fea0ad4013_z.jpg',
-            imgAttribution : 'https://www.flickr.com/photos/bigtallguy/434164568'
+            clickCount: 0,
+            name: 'Tabby',
+            imgSrc: 'img/434164568_fea0ad4013_z.jpg',
+            imgAttribution: 'https://www.flickr.com/photos/bigtallguy/434164568',
+            hideAdmin: true
         },
         {
-            clickCount : 0,
-            name : 'Tiger',
-            imgSrc : 'img/4154543904_6e2428c421_z.jpg',
-            imgAttribution : 'https://www.flickr.com/photos/xshamx/4154543904'
+            clickCount: 0,
+            name: 'Tiger',
+            imgSrc: 'img/4154543904_6e2428c421_z.jpg',
+            imgAttribution: 'https://www.flickr.com/photos/xshamx/4154543904',
+            hideAdmin: true
         },
         {
-            clickCount : 0,
-            name : 'Scaredy',
-            imgSrc : 'img/22252709_010df3379e_z.jpg',
-            imgAttribution : 'https://www.flickr.com/photos/kpjas/22252709'
+            clickCount: 0,
+            name: 'Scaredy',
+            imgSrc: 'img/22252709_010df3379e_z.jpg',
+            imgAttribution: 'https://www.flickr.com/photos/kpjas/22252709',
+            hideAdmin: true
         },
         {
-            clickCount : 0,
-            name : 'Shadow',
-            imgSrc : 'img/1413379559_412a540d29_z.jpg',
-            imgAttribution : 'https://www.flickr.com/photos/malfet/1413379559'
+            clickCount: 0,
+            name: 'Shadow',
+            imgSrc: 'img/1413379559_412a540d29_z.jpg',
+            imgAttribution: 'https://www.flickr.com/photos/malfet/1413379559',
+            hideAdmin: true
         },
         {
-            clickCount : 0,
-            name : 'Sleepy',
-            imgSrc : 'img/9648464288_2516b35537_z.jpg',
-            imgAttribution : 'https://www.flickr.com/photos/onesharp/9648464288'
+            clickCount: 0,
+            name: 'Sleepy',
+            imgSrc: 'img/9648464288_2516b35537_z.jpg',
+            imgAttribution: 'https://www.flickr.com/photos/onesharp/9648464288',
+            hideAdmin: true
         }
     ]
 };
@@ -42,7 +47,7 @@ var model = {
 
 var octopus = {
 
-    init: function() {
+    init: function () {
         // set our current cat to the first one in the list
         model.currentCat = model.cats[0];
 
@@ -51,21 +56,21 @@ var octopus = {
         catView.init();
     },
 
-    getCurrentCat: function() {
+    getCurrentCat: function () {
         return model.currentCat;
     },
 
-    getCats: function() {
+    getCats: function () {
         return model.cats;
     },
 
     // set the currently-selected cat to the object passed in
-    setCurrentCat: function(cat) {
+    setCurrentCat: function (cat) {
         model.currentCat = cat;
     },
 
     // increments the counter for the currently-selected cat
-    incrementCounter: function() {
+    incrementCounter: function () {
         model.currentCat.clickCount++;
         catView.render();
     }
@@ -76,7 +81,7 @@ var octopus = {
 
 var catView = {
 
-    init: function() {
+    init: function () {
         // store pointers to our DOM elements for easy access later
         this.catElem = document.getElementById('cat');
         this.catNameElem = document.getElementById('cat-name');
@@ -84,7 +89,7 @@ var catView = {
         this.countElem = document.getElementById('cat-count');
 
         // on click, increment the current cat's counter
-        this.catImageElem.addEventListener('click', function(){
+        this.catImageElem.addEventListener('click', function () {
             octopus.incrementCounter();
         });
 
@@ -92,7 +97,7 @@ var catView = {
         this.render();
     },
 
-    render: function() {
+    render: function () {
         // update the DOM elements with values from the current cat
         var currentCat = octopus.getCurrentCat();
         this.countElem.textContent = currentCat.clickCount;
@@ -103,7 +108,7 @@ var catView = {
 
 var catListView = {
 
-    init: function() {
+    init: function () {
         // store the DOM element for easy access later
         this.catListElem = document.getElementById('cat-list');
 
@@ -111,7 +116,7 @@ var catListView = {
         this.render();
     },
 
-    render: function() {
+    render: function () {
         var cat, elem, i;
         // get the cats we'll be rendering from the octopus
         var cats = octopus.getCats();
@@ -131,8 +136,8 @@ var catListView = {
             // on click, setCurrentCat and render the catView
             // (this uses our closure-in-a-loop trick to connect the value
             //  of the cat variable to the click event function)
-            elem.addEventListener('click', (function(catCopy) {
-                return function() {
+            elem.addEventListener('click', (function (catCopy) {
+                return function () {
                     octopus.setCurrentCat(catCopy);
                     catView.render();
                 };
@@ -143,6 +148,17 @@ var catListView = {
         }
     }
 };
+
+var admin = {
+    init: function () {
+        this.adminPanel = document.getElementById('admin-panel');
+        this.adminName = document.getElementById('admin-name');
+        this.adminImgSrc = document.getElementById('admin-imgsrc');
+        this.adminClicks = document.getElementById('admin-clicks');
+
+
+    }
+}
 
 // make it go!
 octopus.init();
